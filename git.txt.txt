@@ -1,0 +1,70 @@
+GitHub Nedir? Nasil Kullanilir?
+GitHub, git yazilimi ile entegre olmus bir depolama alanidir. Git ile GitHub birbirine karistirmayin lütfen. Git versiyon kontrol sistemidir. GitHub sayesinde dünyanin çesitli ülkelerinden, bu ülkelerin bazi yerlerinden, projenize farkli bir kaç kisi ekleyerek takim çalismasi yapabilirsiniz. Ayrica, GitHub ile dünya üzerinde projenizin herkes tarafindan görülmesini, degerlendirilmesi saglayabilirsiniz. GitHub üzerinde paylasilan kodlar ile kendinizi gelistirebilirsiniz. Öncelikli olarak GitHub kullanabilmek için bir hesap olusturmaniz gerekmektedir. Buradan GitHub’a kayit olabilirsiniz.
+
+GitHub’a kayit islemini tamamladiysaniz gerçek konuya baslamadan küçük bir kaç seyden bahsetmek istiyorum. GitHub, depolama alaninin windows ve mac için gelistirmis oldugu uygulamasina buradan ulasabilirsiniz. Bu uygulama ile masaüstünüzden sürükle birak seklinde depolama islemi yapabilirsiniz. Ben bu yazimda komut sistemi üzerinden gidecegim. Hazirsak baslayalim.
+
+GitHub’a Proje Gönderme
+Öncelikle yeni bir depo olusmamiz gerekiyor. Bunun için New Repository sekmesinden veya arti butonundan depomuzu olusturalim. Depomuz için bir isim girmemizi, depomuzun herkese açikmi yoksa özel olarak olusturulup olusturulmayacagini soruyor. Eger özel bir depo istersek bir miktar para ödememiz gerekeceginden public bir depo olusturuyoruz. Bir önceki konumuz olan git dersinde ögrendiklerimizi burada uygulayacagiz. Terminali açin ve github’a göndermek istediginiz dizine baglanin.
+
+git remote add githubDepo https://github.com/gokhanyavas/test.git
+Olusturmus oldugunuz deponun baglanti linkini öncelikli olarak tanitmamiz gerekiyor. Buradaki githubDepo takma isimdir. Deponuzun linkini GitHub’ta olusturmus oldugunuz depodan alacaksiniz. Baglanti isleminin gerçeklestigini kontrol etmek için:
+
+git remote
+komutunu kullaniriz. Çikti olarak takma isim geri dönerse baglanti saglanmistir. Simdi projemizi olusturdugumuz depoya göndermek için su komutu yazalim:
+
+git push -u githubDepo master
+push komutu göndermek anlaminda olup -u ise tüm dosyalari göndermek için kullanilan parametredir. Master ise dali belirtmektedir. Konuzun ilerki kisimlarinda dallardan bahsedecegim. Komutu çalistirdigimizda bizden kullanici adi ve sifre isteyecektir. Bilgilerinizi girerek enter tusuna basin ve proje dosyalariniz belirtiginiz depoya eklensin. Projeniz üzerinde dosya silmek eklemek için her seferinde bu islemi tekrar etmeniz gerekir.
+
+.gitignore
+Git projenizde takip edilmesini istemediginiz dosyalar varsa bu dosyalarin ismini .gitignore dosyasina yazarak git tarafindan takip edilmesi engelleyebilirsiniz. Örnegin projenize ait veritabanlarinizi göndermek istemediginizi varsayarsak su komutlari yazmamiz gerekecek:
+
+cat >> .gitignore
+veritabani
+komutunu yazdiktan sonra gönderilmesini istemedigimiz dosyalarin isimlerini gireriz ve bu islemi sonlandirmak için CTRL?—?C tus kombinasyonu ile komutu kapatiriz. Islemin basarili olup olmadigini kontrol etmek için asagidaki komutu kullaniriz. Komut çalistiginda dosya isimleri listelenir.
+
+cat .gitignore
+Bu islemin ardindan gitignore dosyasini commit ediniz. Eger bir klasörü göndermek istemiyorsak gitignore dosyasinda söyle bir ekleme yapmamiz gerekir.
+
+klasörismi/*
+buradaki yildiz isareti tüm dosyalari anlamindadir. Sayet o klasörün içinden sadece bir dosyayi göndermek istersek komutumuz su sekilde olmali:
+
+!klasörismi/main.py
+Buradaki ünlem isareti bu dosyayi dahil etme demektir. Yaptiginiz bu islemleri öncelikle git’e sonrasinda github’a göndermeyi unutmayin.
+
+Branches : Dallar
+Branch git projenizin bir kopyasidir. Git projemizde default olarak gelen master dali projemizin tamamini kapsayan bir daldir. Master dalindan bir kopya alindiginda yeni bir dal olusturmus oluruz. Alinan bu dallar ne ise yarar diye soracak olursaniz, projenizde çalisan takim arkadaslarina dal olusturarak islerin bitiminde master daliyla birlestirerek takimdaki çalisanlarin gelistirdigi modülleri master dalina baglayarak tek bir proje haline getirmek için kullanilir.
+
+git branch
+Komutuyla dallari listeleriz. Uzak depodaki dallari görüntülemek istersek su komutu kullaniriz:
+
+git branch --all
+Terminal üzerinden dal olusturmak istersek:
+
+git branch yönetim
+yönetim adinda bir dal olusturduk. Olusturdugumuz yandala geçmek içinse:
+
+git checkout yönetim
+komutu kullanilir. Olusturulan dallar arasinda yapilan islemleri görüntülemek için asagidaki komutu kullaniriz:
+
+git diff master yönetim
+Dallari birlestirmek istersek:
+
+git merge yönetim
+Yapilan islemlerin github tarafina yansimasi için commit islemini gerçeklestirmeyi unutmayin.
+
+Readme.md
+Bu dosya daha önce olusturdugunuz projenizin açiklama kismidir. Projeyi ziyaret eden kisilerin kodlarinizi okumadan önce projenizle ilgili kisa bilgileri vererek projenizi anlamasini saglayabilirsiniz. Projenize Readme dosyasini eklemek için github üzerinden Add a readme butonunu kullanin. Açilan alanda kullanabileceginiz kodlar su sekilde:
+
+# github-projesi
+##proje amaci 1-6 arasi kare kullanmak yazi boyutunu buyutup kucultmeyi saglar.
+![resim bulunmadi](http://gokhanyavas.com/wp-content/uploads/2017/01/git-gokhanyavas-600x338.jpg)
+**kalin yazmak icin cift yildiz kullanilir**
+*italik yazi tek yildiz ile yazilir*
+`kod yazmak icin egik tirnak kullaniriz`
+[Gozukmesini Istegin Text](http://gokhanyavas.com)
+Watch, Star ve Fork
+Watch: Github'ta bir projeyi takip etmeye yarar.
+Star: Projeyi begendiginiz anlamina gelir ve sonradan yildizladiginiz projeyeleri inceleyebilirisiniz.
+Fork: Projenin bir kopyasini hesabiniza almak istediginizde kullanilir.
+Issues : Problemler
+Projenizle ilgili olusan sorun, öneri vs. gibi diger kisilerden yardim, öneri, çözüm almak için kullanilir. Projenizle ilgili bir issues olusturmak için issues sekmesinde new issues butonunu kullanabiliriz. Istenilen bilgileri girdikten sonra issues yayinlayabilir ve sonuca ulastiginizda kapatabilirsiniz.
